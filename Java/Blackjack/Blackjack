@@ -1,12 +1,7 @@
-package edu.nyu.cs.gs1738.GyuMyungShimAssignment2;
-
+package Blackjack;
 
 import java.util.Scanner;
-
-
 public class Blackjack {
-		
-
 	public static void main(String[] args){
 
 		Scanner input = new Scanner(System.in);
