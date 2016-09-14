@@ -1,0 +1,36 @@
+package edu.nyu.cs.gs1738.GyuMyungShimAssignment7;
+
+import java.util.ArrayList;
+
+public class Sentence implements SequentiallyOrdered {
+	
+	
+	private ArrayList<Word> wordSequence;
+	private String s;
+	
+	
+	
+	public Sentence (String s){
+		String [] splitString = s.split(" ");
+		wordSequence = new ArrayList<Word>();
+		for(int i=0; i<splitString.length; i++){
+			wordSequence.add(new Word(splitString[i]));
+		}
+	}
+	
+	public Word getFirst(){
+		return wordSequence.get(0);
+	}
+	
+	public Word getLast(){
+		
+		return wordSequence.get(wordSequence.size()-1);
+	}
+	
+	public ArrayList getSequence(){
+		return wordSequence;
+		
+	}
+	
+
+}
