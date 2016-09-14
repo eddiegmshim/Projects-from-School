@@ -1,1 +1,1 @@
-Cleans and organizes data taken from NYC Open Data.
+Cleans and organizes a dataset taken from NYC Open Data.
