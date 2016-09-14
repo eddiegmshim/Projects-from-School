@@ -1,0 +1,257 @@
+package edu.nyu.cs.gs1738.GyuMyungShim_Assignment8;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.geom.Line2D;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+
+
+/**
+ * Program Fractal Tree draws a fractal tree
+ * @author Prof Bloomberg
+ * @commentor Eddie (Gyu Myung) Shim
+ */
+
+
+/*
+ * Class FractalTree is a child of JPanel, which allows for the program to call on parent methods or override them as well
+ */
+
+public class FractalTree extends JPanel {
+	
+	
+	
+	/*
+	 * defines variable g1, which is an object of the class Graphics2D 
+	 */
+    public Graphics2D g1;
+    
+    
+    /*
+     * Defines maximum angle degree, 360. Is a final variable so cannot be changed.
+     */
+    public static final int maxAngle = 360;
+    
+    /*
+     * Defines the starting x and y coordinate locations. Is a final variable so cannot be changed.
+     */
+    public static final int startX = 600;
+    public static final int startY = 800;
+    
+    /*
+     * How many levels deep of recursion the program dives into. Is a final variable so cannot be changed.
+     */
+    public static final int numOfRecursions = 9;
+    
+    /*
+     * Defines starting angle degree, 0. Is a final variable so cannot be changed. 
+     */
+    public static final int startAngle = 0;
+    
+    /*
+     * Defines tree size as 2. This is the base of the exponent used to calculate the branch length
+     */
+    public static final double treeSize = 2;
+    
+    /*
+     * Sets detail to 3. This is the number which restricts the number of recursions our program runs to. Variable n will increment down until it hits this number.
+     */
+    public static final int Detail = 3;
+    /*
+     * Sets randFact to 30. This number is used later as an input to r.nextInt(randFact), which gives a random integer between 0 and randFact.
+     */
+    public static final int randFact = 30;
+    /*
+     * Initializes array constFact. This array is later used to calculate the angle of recursive branches drawn. 
+     * By having 4 different numbers, this effectively draws 4 branches pointing in different directions.
+     */
+    public static final int[] constFact = {-60, 05, -50, 45};
+     
+    /*
+     * initializes arrays red, green, and blue. This array will be used to select branch color hues.
+     * The program will select different elements of the arrays to select an overall hue of (red[x],green[y],blue[z])
+     * Note that blue only has values 0, which indicates none of the branches will have blue hues.
+     */
+    public static int[] red =   {0, 0, 0, 0, 7, 15, 23, 31, 39, 47, 55, 43};
+    public static int[] green = {171, 159, 147, 135, 123, 111, 99, 87, 75, 63, 51, 43};
+    public static int[] blue =  {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};   
+     
+    
+    /*
+     * Method degToRad, which intakes an integer degree and returns the radian conversion in double
+     * @param deg, degree 
+     */
+    public static double degToRad(int deg) {
+        return deg * Math.PI / 180;
+    }
+    
+    /*
+     * This method takes an x and y coordinate, 
+     * @param g1, Graphics2D object
+     * @param x, starting x coordinate
+     * @param y, starting y coordinate
+     * @param n, representing number of recursions
+     * @param angle, starting angle degree
+     */
+    public static void drawFractal(Graphics2D g1, int x, int y, int n, int angle) {
+    	 /*
+         * an if statement which exits the recursion loop
+         * it is controlled by the input variable n, which represents the number of recursions
+         * as n is incremented down every recursion, once it hits n==Detail, or n==3, the program will stop drawing further branches
+         */
+        if (n == Detail) return;
+        
+        
+        /*
+         * takes treeSize to the exponent of n-1 and assigns to int len, which represents the length of the branch
+         */
+        int len = (int) Math.round(Math.pow(treeSize, n - 1));
+         
+        /*
+         * assigns (x - sin(angle) * 2^n) to xn1
+         * assigns (y - cos(angle) * 2^n) to yn1
+         */
+        int xn1 = (int) Math.round(x - (2 * len * Math.sin(degToRad(angle))));
+        int yn1 = (int) Math.round(y - (2 * len * Math.cos(degToRad(angle))));
+        
+        /*
+         * finds the midpoint between x and xn1, assigns to mid1x
+         * finds the midpoint between y and yn1, assigns to mid1y
+         */
+        int mid1x = (x + xn1) / 2;
+        int mid1y = (y + yn1) / 2;
+        
+        /*
+         * finds the midpoint between mid1x and xn1, assigns to mid2x
+         * finds the midpoint between mid1y and yn1, assigns to mid2y
+         */
+        int mid2x = (mid1x + xn1) / 2;
+        int mid2y = (mid1y + yn1) / 2;
+        
+        /*
+         * finds the midpoint between x and mid1x, assigns to mid3x
+         * finds the midpoint between y and mid1y, assigns to mid3y
+         */
+        int mid3x = (x + mid1x) / 2;
+        int mid3y = (y + mid1y) / 2;
+        
+        /*
+         * finds the midpoint between mid3x and mid1x, assigns to mid4x
+         * finds the midpoint between mid3y and mid1y, assigns to mid4y
+         */
+        int mid4x = (mid3x + mid1x) / 2;
+        int mid4y = (mid3y + mid1y) / 2;
+         
+        /*
+         * creates new object r
+         */
+        java.util.Random r = new java.util.Random();
+        
+        /*
+         * recursively calls upon drawFractal within the method drawFractal. 
+         * The input parameters for x and y scroll through the midpoints mid1x,...,mid4x and mid1y,...mid4y
+         * The input parameter for n remains constant, n-1. By subtracting 1, we reduce the size of the branch by half, because the variable len decreases to 2^(n-1-1) from 2^(n-1)
+         * The input parameter for angle changes according to constFact, which scrolls through an array with values of constFact = {-60, 05, -50, 45}. 
+         * The angle value is calculated by input @param angle, + a random number between 0 and randFact (30), + the scrolling values of constFact array
+         * This effectively assigns 4 different, random angles for each of the recursive drawFractals, drawing 4 branches in 4 different directions.
+         * The %maxAngle allows the value to remain within 0 and 360 degrees.
+         * By having 4 recursive drawFractals each with different x,y coordinates as well as angles, this recursion effectively draws 4 branches of half size on linked to the original branch
+         * This recursion will repeat n times
+         */
+        drawFractal(g1, mid1x, mid1y, n - 1, (angle + r.nextInt(randFact) + constFact[0]) % maxAngle);
+        drawFractal(g1, mid2x, mid2y, n - 1, (angle + r.nextInt(randFact) + constFact[1]) % maxAngle);
+        drawFractal(g1, mid3x, mid3y, n - 1, (angle + r.nextInt(randFact) + constFact[2]) % maxAngle);
+        drawFractal(g1, mid4x, mid4y, n - 1, (angle + r.nextInt(randFact) + constFact[3]) % maxAngle);
+         
+        /*
+         * sets a color of Color(red, green, blue)
+         * red, green, and blue are determined by the original set array of values:
+         *  public static int[] red =   {0, 0, 0, 0, 7, 15, 23, 31, 39, 47, 55, 43};
+    	 *	public static int[] green = {171, 159, 147, 135, 123, 111, 99, 87, 75, 63, 51, 43};
+    	 *	public static int[] blue =  {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};   
+    	 *
+    	 *	the function r.nextInt()%3 chooses a random integer between -2 and 2. 
+    	 *	by adding n to this random integer, you get a random number between n-2 and n+2
+    	 *	this modified random number refers to the element number on the array of red[] blue[] and green[]
+    	 *	a number from then array of colors are chosen to represent variable Color c
+         */
+        Color c = new Color(red[(r.nextInt() % 3) + n], green[(r.nextInt() % 3) + n], blue[(r.nextInt() % 3) + n]);
+        /*
+         * Color c is set to object g1
+         */
+        g1.setColor(c);
+        /*
+         * Object L1 is created of class Line2D, which intakes parameters
+         * this is an overloaded constructor from the class Line2D which was imported
+         * @param x: x coordinate
+         * @param y: y coordinate
+         * @param xn1
+         * @param yn1
+         */
+        Line2D L1 = new Line2D.Double(x, y, xn1, yn1);
+        /*
+         * calls upon method draw which intakes object L1 parameter
+         * this is an overloaded constructor from the class JPanel which was extended
+         */
+        g1.draw(L1);
+        return;
+    }
+     
+    /*
+     * this is a method which overrides the method paint from class JPanel which was extended
+     * takes an overloaded parameter 
+     * @param Graphics g
+     */
+    public void paint(final Graphics g) {
+    	 /*
+         * assigns input Graphics g transformed to the class Graphics2D to variable g1
+         */
+        g1 = (Graphics2D) g;
+        /*
+         * calls upon drawFractal with given initial starting parameters defined at start of program
+         */
+        drawFractal(g1, startX, startY, numOfRecursions, startAngle);
+    }
+     
+    /*
+     * main function which runs the program
+     */
+    public static void main(String args[]) {
+    	 /*
+         * creates new object JFram FF with input string "Drawing a recursive tree"
+         */
+        JFrame FF = new JFrame("Drawing a recursive tree");
+        /*
+         * sets the method setDefaultCloseOperation to Exit_on_close, which means the program and application will stop once user exits the application.
+         */
+        FF.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        /*
+         * creates new object FractalTree F
+         */
+        FractalTree F = new FractalTree();
+        /*
+         * sets background color to black
+         */
+        FF.setBackground(Color.BLACK);
+        /*
+         * adds object F to object FF
+         */
+        FF.add(F);
+        /*
+         * fits the size of JFrame based on size of components (F)
+         */
+        FF.pack();
+        /*
+         * sets window output to be visible
+         */
+        FF.setVisible(true);
+        /*
+         * Sets window size to 1200 by 1000
+         */
+        FF.setSize(1200, 1000);
+    }
+}
