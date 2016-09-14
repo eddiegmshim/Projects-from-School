@@ -1,4 +1,4 @@
-package edu.nyu.cs.gs1738.GyuMyungShim_Assignment8;
+package FractalTree;
 
 import java.awt.Color;
 import java.awt.Graphics;
