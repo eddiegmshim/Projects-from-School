@@ -1,0 +1,77 @@
+package edu.nyu.cs.gs1738.GyuMyungShimAssignment7;
+
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+
+public class TestSequence {
+	
+	
+	public static void main(String[] args){
+		Scanner input = new Scanner(System.in);
+		
+		
+		System.out.println("Please type a sentence:");
+		String userSent = input.nextLine();
+		
+		
+		
+		//testing Sentence Class
+		Sentence testSentence = new Sentence(userSent);
+		
+		//testing getFirst method in Sentence class
+		Word n = testSentence.getFirst();
+		String m = n.getWord(n);
+		System.out.println("The first word of your sentence is : " + m);
+		
+		//testing getLast method in Sentence class
+		Word q = testSentence.getLast();
+		String w = q.getWord(q);
+		System.out.println("The last word of your sentence is : " + w);
+		
+		//testing getSequence method in Sentence class
+		ArrayList<Word> t = testSentence.getSequence();
+		System.out.println("Your sentence broken up into words: ");
+		for (int i =0; i<t.size(); i++){
+			String u = t.get(i).getWord(t.get(i));
+			System.out.println(u);
+		}
+		
+		
+		
+		
+		
+		
+		
+		//testing Word Class on first word of sentence	
+		
+		String s = m;
+		
+		Word testWord = new Word(s);
+		
+		//testing getFirst method in Word class
+		MyCharacter x = testWord.getFirst();
+		String y = x.getInput();
+		System.out.println("Your first letter of the word is: " + y);
+		
+		//testing getLast method in Word class
+		MyCharacter a = testWord.getLast();
+		String b = a.getInput();
+		System.out.println("Your last letter of the word is: " + b);
+		
+		//testing getSequence method in Word class
+		ArrayList<MyCharacter> c = testWord.getSequence();
+		System.out.println("Your word broken up into letters : ");	
+		for (int i =0; i< c.size(); i++){
+			String d = c.get(i).getInput();
+			System.out.println(d);			
+		}
+		
+		
+		
+		
+		
+	}
+
+}
