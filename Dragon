@@ -1,136 +1,150 @@
 package edu.nyu.cs.gs1738.GyuMyungShimAssignment6;
-import processing.core.*;
+import processing.core.PApplet;
 
-public class Character extends Dragon{
+public class Dragon extends PApplet{
 	
-	private String characterName;
+	public void setup(){
+		size(400,400);
+		background(50,70,100);
+		
+		
+	}
+	
+	public void draw(){
+		fill(50,70,100);
+		background(50,70,100);
+		
+	}
+	
+	
+	private String type;
 	private int health;
 	private int mana;
-	private String job;
 	private String basicAttack;
 	private String spellAttack;
 	private int basicDamage;
 	private int spellDamage;
-	private int level;
-	
-	Character(String type){
-		super(type);
-	}
 	
 
-	public Character(String characterName, String job){
+	
+	
+	public Dragon(){
+		this.type = "Basic Dragon";
+		this.health = 1000;
+		this.mana = 1000;
+		this.basicAttack = "Swing tail";
+		this.spellAttack = "Stomp feet";
+		this.basicDamage = 20;
+		this.spellDamage = 35;
 		
-		if (job.equals("mage")){
-			this.characterName = characterName;
-			this.job = "mage";
+	}
+	
+	public Dragon(String type){
+		if (type.equals("fire")){
+			this.type = "Fire Dragon";
+			this.health = 1100;
 			this.mana = 1000;
-			this.health = 100;
-			this.basicAttack = "Swing staff";
-			this.spellAttack = "Throw fireball";
-			this.basicDamage = 5;
-			this.spellDamage = 40;
-			this.level =1;
-		}
-		
-		if (job.equals("warrior")){
-			this.characterName = characterName;
-			this.job = "warrior";
-			this.mana = 200;
-			this.health = 300;
-			this.basicAttack = "Swing axe";
-			this.spellAttack = "Power swing";
+			this.basicAttack = "Swing tail";
+			this.spellAttack = "Breathe Fire";
 			this.basicDamage = 10;
-			this.spellDamage = 20;
-			this.level =1;
-		}
-	}
-	
-	
-	public Character(String characterName, String job, int level){
-		if (job.equals("mage")){
-			this.characterName = characterName;
-			this.job = "mage";
-			this.mana = 1000 + (level*200);
-			this.health = 100 + (level*50);
-			this.basicAttack = "Swing staff!";
-			this.spellAttack = "Throw fireball!";
-			this.basicDamage = 5 + (level *2);
-			this.spellDamage = 40 + (level *10);
-			this.level =level;
+			this.spellDamage = 50;
 		}
 		
-		if (job.equals("warrior")){
-			this.characterName = characterName;
-			this.job = "warrior";
-			this.mana = 200 + (level*50);
-			this.health = 300 + (level *100);
-			this.basicAttack = "Swing axe!";
-			this.spellAttack = "Power swing!";
-			this.basicDamage = 10 + (level*5);
-			this.spellDamage = 20 + (level *10);
-			this.level =level;
+		if (type.equals("ice")){
+			this.type = "Ice Dragon";
+			this.health = 800;
+			this.mana = 1000;
+			this.basicAttack = "Swing tail";
+			this.spellAttack = "Shoot Ice Beams";
+			this.basicDamage = 10;
+			this.spellDamage = 70;
 		}
+		
+		if (type.equals("baby")){
+			this.type = "Baby Dragon";
+			this.health = 300;
+			this.mana = 500;
+			this.basicAttack = "Swing tail";
+			this.spellAttack = "Slash Claws";
+			this.basicDamage = 5;
+			this.spellDamage = 20;
+		}
+		
 	}
 	
-	//character information method
-	public void getCharInformation(String characterName){
-		System.out.println("Your name is: " + this.characterName);
-		System.out.println("Your class is: " + this.job);
-		System.out.println("Your health is: " + this.health);
-		System.out.println("Your mana is: " + this.mana);
-		System.out.println("Your basic attack is: " + this.basicAttack + " Damage: " + this.basicDamage);
-		System.out.println("Your spell attack is: " + this.spellAttack + " Damage: " + this.spellDamage);
+	public Dragon(String type, int level){
+		if (type.equals("fire")){
+			this.type = "Fire Dragon";
+			this.health = 1100;
+			this.mana = 1000;
+			this.basicAttack = "Swing tail";
+			this.spellAttack = "Breathe Fire";
+			this.basicDamage = 10 + (level*20);
+			this.spellDamage = 50 + (level*40);
+		}
+		
+		if (type.equals("ice")){
+			this.type = "Ice Dragon";
+			this.health = 800 + (level *200);
+			this.mana = 1000;
+			this.basicAttack = "Swing tail";
+			this.spellAttack = "Shoot Ice Beams";
+			this.basicDamage = 10 + (level*20);
+			this.spellDamage = 70+ (level*40);
+		}
+		
+		if (type.equals("baby")){
+			this.type = "Baby Dragon";
+			this.health = 300 + (level * 100);
+			this.mana = 500;
+			this.basicAttack = "Swing tail";
+			this.spellAttack = "Slash Claws";
+			this.basicDamage = 5 + (level * 10);
+			this.spellDamage = 20 + (level *20);
+		}
+		
+	}
+	
+	//method to display dragon information
+	public void getDragonInformation(String type){
+		System.out.println("Dragon type is: " + this.type);
+		System.out.println("Dragon health is: " + this.health);
+		System.out.println("Dragon mana is: " + this.mana);
+		System.out.println("Dragon basic attack is: " + this.basicAttack + " Damage: " + this.basicDamage);
+		System.out.println("Dragon spell attack is: " + this.spellAttack + " Damage: " + this.spellDamage);
 		System.out.println("");
 		System.out.println("");
 	}
 	
-	//heal health method
-	public void drinkHealthPotion(){
-		this.health += 100;
-	}
-	
-	//heal mana method
-	public void drinkManaPotion(){
-		this.mana+=100;
-	}
-	
-	//method for basic attack
-	public int userBasicAttack(){
+	//method to basic attack
+	public int dragonBasicAttack(){
 		int damage = this.basicDamage;
 		return damage;
 	}
 	
-	//method for spell attack
-	public int userSpellAttack(){
+	
+	//method to spell attack
+	public int dragonSpellAttack(){
 		int damage = this.spellDamage;
 		this.mana -= 50;
 		return damage;
 	}
 	
 	//method for receiving damage
-	public void userDamaged(int damage){
+	public void dragonDamaged(int damage){
 		this.health -= damage;
 	}
 	
-	//method for getting basic attack name
-	public String getBasicAtkName(){
-		return this.basicAttack;
+	//method for getting spell attack name
+	public String getDragSpellName(){
+		return this.spellAttack;
 	}
 	
-	//method for getting spell attack name
-		public String getSpellAtkName(){
-			return this.spellAttack;
-		}
-		
-	//method for getting user health 
-		public int getUserHealth(){
+	//method for getting dragon health
+		public int getDragHealth(){
 			return this.health;
 		}
 		
-	//method for getting user mana 
-		public int getUsermana(){
-			return this.mana;
-		}
-
+	
 
 }
