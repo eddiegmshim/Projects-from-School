@@ -1,0 +1,15 @@
+package edu.nyu.cs.gs1738.GyuMyungShimAssignment7;
+
+public class MyCharacter extends OrderedThing{
+	
+	
+	private String input;
+	
+	public MyCharacter(String input){
+		this.input=input;
+	}
+	
+	public String getInput(){
+		return input;
+	}
+}
