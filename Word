@@ -1,0 +1,38 @@
+package edu.nyu.cs.gs1738.GyuMyungShimAssignment7;
+
+import java.util.ArrayList;
+
+public class Word extends OrderedThing implements SequentiallyOrdered {
+	
+	private ArrayList<MyCharacter> charSequence;
+	public String s;
+	
+	
+	public Word (String s){
+		this.s =s;
+		charSequence = new ArrayList<MyCharacter>();
+		for(int i=0; i<s.length(); i++){
+			charSequence.add(new MyCharacter(s.substring(i, i+1)));
+		}
+	}
+	public MyCharacter getFirst(){
+		return charSequence.get(0);
+	}
+	
+	public MyCharacter getLast(){
+		
+		return charSequence.get(charSequence.size()-1);
+	}
+	
+	public ArrayList getSequence(){
+		return charSequence;
+		
+	}
+	
+	public String getWord(Word a){
+		String b = this.s;
+		return s;
+	}
+
+
+}
