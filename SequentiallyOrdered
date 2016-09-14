@@ -1,0 +1,11 @@
+package edu.nyu.cs.gs1738.GyuMyungShimAssignment7;
+
+import java.util.ArrayList;
+
+public interface SequentiallyOrdered {
+
+	public OrderedThing getFirst();
+	public OrderedThing getLast();
+	public ArrayList<OrderedThing> getSequence();
+
+}
