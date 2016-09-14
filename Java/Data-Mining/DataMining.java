@@ -1,4 +1,4 @@
-package edu.nyu.cs.gs1738.GyuMyungShimAssignment4;
+package DataMining;
 
 import java.io.File;
 import java.io.FileNotFoundException;
