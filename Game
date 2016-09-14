@@ -1,0 +1,204 @@
+package edu.nyu.cs.gs1738.GyuMyungShimAssignment6;
+
+import java.util.Scanner;
+import processing.core.*;
+
+public class Game extends Character {
+	
+
+	
+
+	//points to overloaded method in character class
+	public Game(String characterName, String type){
+		super(characterName, type);
+		
+	}
+	
+	//points to dragon class
+	public Game(String type){
+		super(type);
+	}
+	
+
+	public static void main (String[] args){
+		Scanner input = new Scanner(System.in);
+		
+		//introduction
+		System.out.println("Welcome to Dragon Slayer, a game where you slay dragons! Let's get started. Please enter a name for your character.");
+		String characterName = input.nextLine();
+		System.out.println("Now choose whether you want to play as a warrior or mage (type warrior or mage):");
+		String charType = input.nextLine();
+		
+		
+		//creates user game character
+		Game user1 = new Game(characterName, charType);
+		System.out.println("Here is your character profile");
+		user1.getCharInformation(characterName);
+		
+		//creates enemy Dragon
+		System.out.println("Choose what type of dragon you want to battle: fire, ice, or baby");
+		String dragType = input.nextLine();
+		Game dragon1 = new Game(dragType);
+		System.out.println("Here is the dragon profile");
+		dragon1.getDragonInformation(dragType);
+		
+		while(true){
+			System.out.println("Choose an action. Type help for a list of commands");
+			String response = input.nextLine();
+			
+			
+			
+			//deciding whether dragon will basic or spell attack. Up to random chance, 20% of spell, 80% of basic (defined later)
+			int dragonAttackProbability = (int) (5*Math.random());
+
+			
+			//user command
+			switch (response){
+			
+			
+				case "help":
+					System.out.println("Here are the actions you can do: check status, basic attack, spell attack, drink health potion, drink mana potion");
+					break;
+					
+					
+				case "check status":
+					user1.getCharInformation(characterName);
+					dragon1.getDragonInformation(dragType);
+					break;
+					
+					
+				case "basic attack":
+					// user's turn
+					System.out.println("You used " + user1.getBasicAtkName() + "!");
+					int userDamage1 = user1.userBasicAttack();
+					dragon1.dragonDamaged(userDamage1);
+					if (dragon1.getDragHealth() <0){
+						System.out.println("You have killed the dragon! You win!");
+						break;
+					}
+					
+					// dragon's turn
+					if (dragonAttackProbability <1){
+						System.out.println("Dragon used Swing Tail!");
+						int dragonDamage = dragon1.dragonBasicAttack();
+						user1.userDamaged(dragonDamage);
+						if (user1.getUserHealth() <0){
+							System.out.println("You have died to the dragon! You lose!");
+							System.exit(1);
+						}
+					}
+					else {
+						System.out.println("Dragon used " + dragon1.getDragSpellName() + "!");
+						int dragonDamage = dragon1.dragonSpellAttack();
+						user1.userDamaged(dragonDamage);
+						if (user1.getUserHealth() <0){
+							System.out.println("You have died to the dragon! You lose!");
+							System.exit(1);
+						}
+					}
+					break;
+					
+					
+				case "spell attack":
+					// user's turn 
+					System.out.println("You used " + user1.getSpellAtkName() + "!");
+					int userDamage2 = user1.userSpellAttack();
+					dragon1.dragonDamaged(userDamage2);
+					if (dragon1.getDragHealth() <0){
+						System.out.println("You have killed the dragon! You win!");
+						break;
+					}
+					
+					//dragon's turn
+					if (dragonAttackProbability <1){
+						System.out.println("Dragon used Swing Tail!");
+						int dragonDamage = dragon1.dragonBasicAttack();
+						user1.userDamaged(dragonDamage);
+						if (user1.getUserHealth() <0){
+							System.out.println("You have died to the dragon! You lose!");
+							System.exit(1);
+						}
+					}
+					else {
+						System.out.println("Dragon used " + dragon1.getDragSpellName() + "!");
+						int dragonDamage = dragon1.dragonSpellAttack();
+						user1.userDamaged(dragonDamage);
+						if (user1.getUserHealth() <0){
+							System.out.println("You have died to the dragon! You lose!");
+							System.exit(1);
+						}
+					}
+					
+					
+					break;
+					
+					
+				case "drink health potion":
+					//user's turn
+					user1.drinkHealthPotion();
+					
+					//dragon's turn
+					if (dragonAttackProbability <1){
+						System.out.println("Dragon used Swing Tail!");
+						int dragonDamage = dragon1.dragonBasicAttack();
+						user1.userDamaged(dragonDamage);
+						if (user1.getUserHealth() <0){
+							System.out.println("You have died to the dragon! You lose!");
+							System.exit(1);
+						}
+					}
+					else {
+						System.out.println("Dragon used " + dragon1.getDragSpellName() + "!");
+						int dragonDamage = dragon1.dragonSpellAttack();
+						user1.userDamaged(dragonDamage);
+						if (user1.getUserHealth() <0){
+							System.out.println("You have died to the dragon! You lose!");
+							System.exit(1);
+						}
+					}
+					break;
+					
+					
+				case "drink mana potion":
+					//user's turn
+					user1.drinkManaPotion();
+					
+					//dragon's turn
+					if (dragonAttackProbability <1){
+						System.out.println("Dragon used Swing Tail!");
+						int dragonDamage = dragon1.dragonBasicAttack();
+						user1.userDamaged(dragonDamage);
+						if (user1.getUserHealth() <0){
+							System.out.println("You have died to the dragon! You lose!");
+							System.exit(1);
+						}
+					}
+					else {
+						System.out.println("Dragon used " + dragon1.getDragSpellName() + "!");
+						int dragonDamage = dragon1.dragonSpellAttack();
+						user1.userDamaged(dragonDamage);
+						if (user1.getUserHealth() <0){
+							System.out.println("You have died to the dragon! You lose!");
+							System.exit(1);
+						}
+					}
+					break;
+					
+					
+					
+				default:
+					System.out.println("Did not recognize command. Press help for list of commands");
+					break;	
+				
+			}
+			
+		
+		}
+		
+		
+		
+		
+		
+		
+	}
+}
