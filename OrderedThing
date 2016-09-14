@@ -1,0 +1,17 @@
+package edu.nyu.cs.gs1738.GyuMyungShimAssignment7;
+
+import java.util.Scanner;
+
+public class OrderedThing {
+	
+	private String input;
+	
+	public OrderedThing(){
+		input=null;
+	}
+	
+	public OrderedThing (String input){
+		this.input = input;
+	}
+
+}
