@@ -1,4 +1,4 @@
-#authors
-Eddie Shim
-Melody Duan
+#Authors:
+Eddie Shim,
+Melody Duan,
 Hengyi Wu
