@@ -6,5 +6,5 @@ James Ang,
 Eka Putra
 
 #Description
-Hackathon at Hackday w/ Tech@NYU and Major League Hacking. Portfolio optimization using linear algebra and object orientated programming. 
-December 2014
+December 2014 hackathon at Hackday w/ Tech@NYU and Major League Hacking. Portfolio optimization using linear algebra and object orientated programming. Given a portfolio of stocks, returns optimal weights of a minimum variance portfolio. Data taken from Nasdaq.
+
