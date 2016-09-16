@@ -1,7 +1,7 @@
 #Authors:
-Eddie Shim
-Nicole Lee
-James Ang
+Eddie Shim,
+Nicole Lee,
+James Ang,
 Eka Putra
 
 #Description
